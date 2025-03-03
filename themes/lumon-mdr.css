@@ -1,0 +1,479 @@
+/*
+ * Lumon MDR Terminal Theme for Flame Dashboard
+ * Version: 1.0.0
+ * Author: Your Name
+ * 
+ * Inspired by the terminal interfaces from Apple TV+'s "Severance".
+ * 
+ * INSTALLATION:
+ * 1. Log in to your Flame dashboard
+ * 2. Go to Settings → Appearance → Custom CSS
+ * 3. Copy and paste the entire contents of this file
+ * 4. Click "Save Changes"
+ * 5. Refresh the page
+ * 
+ * CUSTOMIZATION:
+ * - Adjust the glow intensity by modifying the text-shadow values
+ * - Change the primary colors in the :root section
+ */
+
+
+/* Override default variables */
+body {
+    --color-background: #000920 !important;
+    --color-primary: #00e5ff !important;  /* Brighter cyan-blue color */
+    --color-accent: #9fefff !important;   /* Lighter accent color */
+    font-family: "Courier New", monospace !important;
+}
+
+/* Background and base styling */
+body {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: var(--color-background) !important;
+}
+
+body:before {
+    content: "";
+    position: fixed;
+    overflow: hidden;
+    background-color: #0a192f;
+    background-size: cover;
+    z-index: -999;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    
+    /* Add vignette effect for CRT look */
+    box-shadow: inset 0 0 150px rgba(0, 60, 120, 0.5), 
+                inset 0 0 50px rgba(0, 30, 60, 0.5) !important;
+}
+
+/* Enhanced CRT effects - blue glow and scanlines */
+/* Scanlines effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 229, 255, 0.03) 50%, rgba(0, 0, 0, 0.2) 50%);
+    background-size: 100% 2px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Main container */
+.Layout_Container__HIHX7 {
+    padding-right: 70px !important;
+    padding-left: 70px !important;
+    width: 100% !important;
+    color: var(--color-primary) !important;
+    text-shadow: 0 0 5px rgba(100, 255, 218, 0.4), 0 0 10px rgba(100, 255, 218, 0.2) !important;
+}
+
+/* Header styling */
+.Header_Header__GCJdR h1 {
+    color: var(--color-primary) !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    border-bottom: 1px solid var(--color-primary) !important;
+    display: inline-block !important;
+    padding-bottom: 5px !important;
+    text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-primary) !important;
+}
+
+.Header_Header__GCJdR p {
+    color: var(--color-accent) !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 0 5px var(--color-accent) !important;
+}
+
+/* Add blinking cursor effect */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.Header_Header__GCJdR h1::after {
+    content: "_";
+    animation: blink 1s infinite;
+    color: var(--color-primary);
+    font-weight: normal;
+}
+
+/* Section headers */
+.SectionHeadline_SectionHeadline__xa0oJ {
+    color: var(--color-primary) !important;
+    font-size: 1.3rem !important;
+    border-bottom: 1px solid var(--color-primary) !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 20px !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 0 8px var(--color-primary) !important;
+    position: relative !important;
+}
+
+/* Add hex code label similar to terminal in image */
+.SectionHeadline_SectionHeadline__xa0oJ::after {
+    content: "0x" attr(data-id);
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    font-family: "Courier New", monospace;
+}
+
+/* Assign data-id via JavaScript for each section */
+.Home_CategoryName__1QEvj:nth-of-type(1)::after {
+    content: "0x137056";
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    font-family: "Courier New", monospace;
+}
+
+.Home_CategoryName__1QEvj:nth-of-type(2)::after {
+    content: "0x08322E";
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    font-size: 0.7em;
+    opacity: 0.7;
+    font-family: "Courier New", monospace;
+}
+
+/* Fix for overlapping elements during hover scaling */
+.AppGrid_AppGrid__ZxiaC, 
+.BookmarkGrid_BookmarkGrid__i3Tj4 {
+    position: relative !important;
+    perspective: 800px !important;
+}
+
+/* Ensure there's enough space for the scaling effect */
+.AppCard_AppCard__NPTM5, 
+.BookmarkCard_BookmarkCard__ooGTe {
+    margin: 8px !important;
+}
+
+/* Create a ripple effect when hovering over cards */
+.AppCard_AppCard__NPTM5::after,
+.BookmarkCard_BookmarkCard__ooGTe::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.4) 0%, rgba(0, 229, 255, 0) 70%);
+    opacity: 0;
+    border-radius: 2px;
+    z-index: -1;
+    transform: scale(0.5);
+    transition: all 0.5s ease-out;
+}
+
+.AppCard_AppCard__NPTM5:hover::after,
+.BookmarkCard_BookmarkCard__ooGTe:hover::after {
+    opacity: 1;
+    transform: scale(1.3);
+}
+
+/* Application tiles */
+.AppCard_AppCard__NPTM5 {
+    padding: 25px !important;
+    margin-bottom: 12px !important;
+    border-radius: 2px !important;
+    background-color: rgba(0, 29, 58, 0.7) !important;
+    border: 1px solid rgba(0, 229, 255, 0.4) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.25) !important;
+}
+
+/* Application tile hover effect */
+.AppCard_AppCard__NPTM5 {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    transform-origin: center !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.AppCard_AppCard__NPTM5:hover {
+    background-color: rgba(0, 56, 101, 0.8) !important;
+    border: 1px solid var(--color-primary) !important;
+    transform: scale(1.3) !important;
+    z-index: 10 !important;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.7) !important;
+}
+
+/* Application titles */
+.AppCard_AppCardDetails__HgNoY h5 {
+    color: var(--color-accent) !important;
+    font-size: 16px !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 500 !important;
+    text-shadow: 0 0 8px var(--color-primary) !important;
+}
+
+/* App Subtitle (IP addresses) */
+.AppCard_AppCardDetails__HgNoY span {
+    color: var(--color-primary) !important;
+    opacity: 0.8 !important;
+    font-size: 0.8em !important;
+    letter-spacing: 0.5px !important;
+    font-family: "Courier New", monospace !important;
+    
+    /* Make IP addresses more like the numbered grid in the image */
+    background: rgba(0, 51, 102, 0.4) !important;
+    padding: 2px 5px !important;
+    border-radius: 2px !important;
+    margin-top: 3px !important;
+    display: inline-block !important;
+}
+
+/* Improved app card animations */
+.AppCard_AppCardDetails__HgNoY h5, 
+.AppCard_AppCardDetails__HgNoY span,
+.AppCard_AppCardIcon__ThrUl {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Application titles grow with container */
+.AppCard_AppCard__NPTM5:hover .AppCard_AppCardDetails__HgNoY h5 {
+    font-size: 17px !important;
+    text-shadow: 0 0 8px var(--color-primary) !important;
+}
+
+/* App Subtitle (IP addresses) grow with container */
+.AppCard_AppCard__NPTM5:hover .AppCard_AppCardDetails__HgNoY span {
+    font-size: 0.85em !important;
+}
+
+/* Icons grow with container */
+.AppCard_AppCard__NPTM5:hover .AppCard_AppCardIcon__ThrUl {
+    transform: scale(1.05) !important;
+    filter: drop-shadow(0 0 6px var(--color-primary)) brightness(2.2) !important;
+}
+
+/* Bookmark grid layout */
+.BookmarkGrid_BookmarkGrid__i3Tj4 {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 15px !important;
+}
+
+/* Bookmark tiles */
+.BookmarkCard_BookmarkCard__ooGTe {
+    padding: 20px !important;
+    margin-bottom: 12px !important;
+    border-radius: 4px !important;
+    background-color: rgba(13, 42, 73, 0.7) !important;
+    border: 1px solid rgba(100, 255, 218, 0.2) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.15) !important;
+}
+
+/* Bookmark titles */
+.BookmarkCard_BookmarkCard__ooGTe h3 {
+    color: var(--color-accent) !important;
+    font-size: 16px !important;
+    letter-spacing: 0.5px !important;
+    text-shadow: 0 0 8px rgba(139, 188, 204, 0.7), 0 0 15px rgba(100, 255, 218, 0.4) !important;
+}
+
+/* Bookmark links */
+.BookmarkCard_Bookmarks__alLCe a {
+    color: var(--color-primary) !important;
+    text-shadow: 0 0 5px rgba(100, 255, 218, 0.3) !important;
+}
+
+/* Bookmark tile hover effect */
+.BookmarkCard_BookmarkCard__ooGTe {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    transform-origin: center !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.BookmarkCard_BookmarkCard__ooGTe:hover {
+    background-color: rgba(0, 56, 101, 0.8) !important;
+    border: 1px solid var(--color-primary) !important;
+    transform: scale(1.3) !important;
+    z-index: 10 !important;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.7) !important;
+}
+
+/* Settings button */
+.Home_SettingsButton__DrUPz {
+    border-radius: 4px !important;
+    background-color: rgba(13, 42, 73, 0.9) !important;
+    border: 1px solid rgba(100, 255, 218, 0.3) !important;
+    color: var(--color-primary) !important;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.2) !important;
+}
+
+.Home_SettingsButton__DrUPz:hover {
+    background-color: rgba(20, 66, 114, 0.9) !important;
+    border: 1px solid var(--color-primary) !important;
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.4) !important;
+}
+
+/* Weather widget with Severance styling */
+.WeatherWidget_WeatherWidget__3XlYt {
+    background-color: rgba(0, 24, 48, 0.7) !important;
+    border: 1px solid var(--color-primary) !important;
+    border-radius: 2px !important;
+    padding: 5px 10px !important;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.25) !important;
+    position: relative !important;
+}
+
+.WeatherWidget_WeatherWidget__3XlYt::before {
+    content: "LUMON";
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    font-size: 10px;
+    color: var(--color-primary);
+    opacity: 0.5;
+    text-shadow: 0 0 5px var(--color-primary);
+}
+
+.WeatherWidget_WeatherDetails__1y3CA {
+    color: var(--color-primary) !important;
+    text-shadow: 0 0 5px var(--color-primary) !important;
+}
+
+.WeatherWidget_WeatherDetails__1y3CA span:first-child {
+    border-bottom: 1px solid var(--color-primary) !important;
+    position: relative !important;
+}
+
+.WeatherWidget_WeatherDetails__1y3CA span:first-child::after {
+    content: "%";
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    font-size: 0.7em;
+}
+
+/* Input fields and buttons styling */
+input, select, textarea, button {
+    background-color: rgba(13, 42, 73, 0.7) !important;
+    border: 1px solid rgba(100, 255, 218, 0.3) !important;
+    color: var(--color-primary) !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border: 1px solid var(--color-primary) !important;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.3) !important;
+}
+
+/* Search bar */
+.SearchBar_SearchBar__MQiwu {
+    border-bottom: 2px solid var(--color-accent) !important;
+    background-color: rgba(13, 42, 73, 0.5) !important;
+    color: var(--color-primary) !important;
+    padding: 10px !important;
+    border-radius: 4px !important;
+}
+
+.SearchBar_SearchBar__MQiwu:focus {
+    background-color: rgba(20, 66, 114, 0.7) !important;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.2) !important;
+}
+
+/* Empty bookmarks message styling */
+.Home_BookmarksEmpty__zixUj {
+    color: var(--color-primary) !important;
+    opacity: 0.8 !important;
+}
+
+/* Modal styling */
+.Modal_Modal__Ezlc6 {
+    background-color: rgba(6, 18, 36, 0.85) !important;
+}
+
+.ModalForm_ModalForm__1ZEXD {
+    background-color: rgba(13, 42, 73, 0.95) !important;
+    border: 1px solid var(--color-primary) !important;
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.3) !important;
+}
+
+/* Add a subtle CRT flicker animation */
+@keyframes flicker {
+    0% { opacity: 1.0; }
+    1% { opacity: 0.92; }
+    2% { opacity: 1.0; }
+    67% { opacity: 1.0; }
+    68% { opacity: 0.95; }
+    69% { opacity: 1.0; }
+    70% { opacity: 1.0; }
+    71% { opacity: 0.97; }
+    72% { opacity: 1.0; }
+}
+
+/* Add subtle horizontal distortion like an old CRT */
+@keyframes distort {
+    0% { transform: translateX(0); }
+    5% { transform: translateX(-0.5px); }
+    10% { transform: translateX(0.5px); }
+    15% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+
+body {
+    animation: flicker 8s infinite, distort 4s infinite;
+}
+
+/* Table styling */
+.Table_Table__-hkEn {
+    border: 1px solid rgba(100, 255, 218, 0.3) !important;
+    background-color: rgba(13, 42, 73, 0.5) !important;
+}
+
+.Table_Table__-hkEn th {
+    background-color: rgba(20, 66, 114, 0.9) !important;
+    color: var(--color-primary) !important;
+    border-bottom: 1px solid var(--color-primary) !important;
+}
+
+.Table_Table__-hkEn td {
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1) !important;
+}
+
+/* Action buttons */
+.ActionButton_ActionButton__kAST2 {
+    border: 1px solid rgba(100, 255, 218, 0.3) !important;
+    background-color: rgba(13, 42, 73, 0.7) !important;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.1) !important;
+}
+
+.ActionButton_ActionButton__kAST2:hover {
+    background-color: rgba(20, 66, 114, 0.9) !important;
+    border: 1px solid var(--color-primary) !important;
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.3) !important;
+}
+
+/* Notifications styling */
+.Notification_Notification__pmd4Q {
+    background-color: rgba(13, 42, 73, 0.8) !important;
+    border: 1px solid rgba(100, 255, 218, 0.3) !important;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2) !important;
+    color: var(--color-primary) !important;
+}
+
+.Notification_Notification__pmd4Q:hover {
+    background-color: rgba(20, 66, 114, 0.9) !important;
+    border: 1px solid var(--color-primary) !important;
+    box-shadow: 0 0 25px rgba(100, 255, 218, 0.4) !important;
+}
