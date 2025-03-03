@@ -9,8 +9,6 @@ A collection of custom CSS themes for [Flame Dashboard](https://github.com/pawel
 ### Lumon MDR Terminal
 Inspired by the eerie and distinctive terminal interfaces from the Apple TV+ show "Severance". Features the iconic blue glow, monospaced text, and subtle CRT effects that mimic the Macrodata Refinement terminals used at Lumon Industries.
 
-![Lumon MDR Terminal]
-
 **Key Features:**
 - Distinctive cyan-blue glow effects
 - CRT scanlines and subtle screen distortion
